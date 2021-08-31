@@ -1,86 +1,76 @@
-# class Node:
-#     def __init__(self, data) -> None:
-#         self.data = data
-#         self.next = None
+from logging import NOTSET
 
-# class LinkedList:
-#     def __init__(self) -> None:
-#         self.items = None
-#         self.head = None
+
+class Node:
+    def __init__(self, data) -> None:
+        self.data = data
+        self.next = None
+
+class LinkedList:
+    def __init__(self) -> None:
+        self.items = None
+        self.head = None
     
-#     def __iter__(self):
-#         current_now = self.head
-#         while not current_now == None:
-#             yield current_now.data
-#             current_now = current_now.next        
+    def __iter__(self):
+        current_now = self.head
+        while not current_now == None:
+            yield current_now.data
+            current_now = current_now.next        
     
-#     def add(self, item):
-#         new = Node(item)
-#         new.next = self.head
-#         self.head = new
+    def add(self, item):
+        new = Node(item)
+        new.next = self.head
+        self.head = new
 
-#     def remove(self, data):
-#         found = False
-#         node = self.head
-#         previous = None
-#         while not found:
-#             if node.data == data:
-#                 found = True
-#                 if previous == None:
-#                     self.head = node.next
-#                 else:
-#                     previous.next=node.next
-            
-#             if node.next == None:
-#                 raise Exception('Index not found')
-#             else:
-#                 previous = node
-#                 node = node.next
+    def pop(self):
+        node = self.head
+        self.head = None
+        if not node.next == None:
+            self.head = node.next
 
-#     def size(self):
-#         count = 0
-#         node = self.head
-#         while not node == None:
-#             count += 1
-#             node = node.next   
-#         return count
+        return node.data
+
+    def size(self):
+        count = 0
+        node = self.head
+        while not node == None:
+            count += 1
+            node = node.next   
+        return count
 
 class Stack:
     def __init__(self) -> None:
-        self.items = [] #using List
+        self.items = LinkedList()
     
     def __iter__(self):
         for item in self.items:
-            yield item        
-
+            yield item
+    
     def push(self, item):
-        self.items.insert(0, item)
+        self.items.add(item)
     
     def pop(self):
-        return self.items.pop(0)
+        return self.items.pop()
     
-    def peek(self):
-        return self.items[0]
-
     def size(self):
-        self.items.size()
+        return self.items.size()
 
 class Queue:
     def __init__(self) -> None:
         self.items = Stack()
+        self.items_copy = Stack()
     
     def enqueue(self, item):
+        self.items_copy = self.items
+        self.items = Stack()
         self.items.push(item)
+        while self.items_copy.size() > 0:
+            self.items.push( self.items_copy.pop() )
     
     def dequeue(self):
-        #return self.items.pop(0)
+        return self.items.pop()
         
     
     def printQueue(self):
         return ','.join(self.items)
 
-
-
-if __name__ == '__main__':
-    pass
-    
