@@ -1,8 +1,8 @@
-from myclass import MyClass
+from practice import *
 import unittest
 
 
-class TestMyClass(unittest.TestCase):
+class TestPractice(unittest.TestCase):
     def test_something(self):
         pass
 
