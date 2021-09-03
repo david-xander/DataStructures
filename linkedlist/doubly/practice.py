@@ -13,7 +13,7 @@ class LinkedList:
     def __iter__(self):
         current_node = self.head
         while not current_node == None:
-            yield current_node.data
+            yield str(current_node.data)
             current_node = current_node.next
     
     def addFront(self, item):
@@ -81,6 +81,9 @@ class LinkedList:
     def append(self, item):
         self.addBack(item)
 
+    def add(self, item):
+        self.addBack(item)
+
     def pop(self):
         return self.popBack()
 
@@ -90,8 +93,56 @@ class LinkedList:
     def length(self) -> int:
         return self.count
     
+    def findMiddle(self):
+        node = self.head
+        half = self.length()/2
+        i = 0.
+        while i < half:
+            if i + 1 >= half:
+                pass
+            else:
+                node = node.next
+            i += 1
+
+        return node.data
+
+    def delete_n_nodes_after_m_nodes(self, n, m):
+        node = self.head
+        start_node = None
+        j = 0
+        k = 0
+        while j < n and not node == None:
+            if k == m:
+                if j == 0 and j < n:
+                    start_node = node.prev                   
+                elif j + 1 == n:
+                    # m = 0
+                    if start_node == None:
+                        self.head = node.next
+                        node.next.prev = None
+                    # m points to last nodes
+                    if node.next == None:
+                        start_node.next = None
+                        self.tail = start_node
+                    # in the middle
+                    elif not start_node == None:
+                        start_node.next = node.next
+                        node.next.prev = start_node
+
+                self.count -= 1
+                j += 1
+            else:
+                k += 1
+            
+            node = node.next
 
     
 if __name__ == '__main__':
-    pass
-    
+    s = LinkedList()
+    s.add(1)
+    s.add(2)
+    s.add('cosa')
+    s.add(4)
+    s.add(5)
+    print(s.findMiddle())
+

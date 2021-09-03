@@ -2,7 +2,7 @@ from datastructures import UnOrderedList
 import unittest
 
 
-class TestingQueue(unittest.TestCase):
+class TestingLinkedList(unittest.TestCase):
 
     def test_empty(self):
         s = UnOrderedList()
