@@ -1,4 +1,4 @@
-from practice import *
+from datastructures.tree.dfs_inorder_binary_tree.practice import *
 import unittest
 
 
