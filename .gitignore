@@ -2,5 +2,5 @@
 _blank_project
 .vscode
 .pytest_cache
-.code-workspace
+*.code-workspace
 __pycache__
