@@ -1,1 +1,4 @@
-/.DS_Store
+.DS_Store
+_blank_project
+.vscode
+.pytest_cache
